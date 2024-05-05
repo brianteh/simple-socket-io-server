@@ -15,7 +15,7 @@ const server = http.createServer(app);
 // Create a new instance of Socket.IO by passing the HTTP server
 const io = socketIO(server, {
   cors: {
-    origin: ['http://localhost','http://eliteolympiad.localdev','http://portal.eliteolympiad.org']
+    origin: "*"//['http://localhost','http://eliteolympiad.localdev','http://portal.eliteolympiad.org']
   }}
 );
 
