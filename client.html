@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Client</title>
+  <!-- Include the Socket.IO client library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // Connect to the WebSocket server
+    const socket = io('http://localhost:3000');
+
+    // Event handler for receiving chat messages
+    socket.on('chat message', function(msg) {
+      // Display the received message in the browser
+      const messages = document.getElementById('messages');
+      const li = document.createElement('li');
+      li.textContent = msg;
+      messages.appendChild(li);
+    });
+
+    // Function to send a chat message
+    function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const message = input.value;
+      // Emit a 'chat message' event to the server
+      socket.emit('chat message', message);
+      // Clear the input field after sending the message
+      input.value = '';
+    }
+  </script>
+</head>
+<body>
+  <h1>Socket.IO Client</h1>
+  <ul id="messages"></ul>
+  <input type="text" id="messageInput">
+  <button onclick="sendMessage()">Send</button>
+</body>
+</html>
